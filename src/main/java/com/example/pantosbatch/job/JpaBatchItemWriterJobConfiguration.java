@@ -1,5 +1,7 @@
 package com.example.pantosbatch.job;
 
+import com.example.pantosbatch.step.SendEmailStep;
+import com.example.pantosbatch.step.UpdateUserStep;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -17,7 +19,7 @@ public class JpaBatchItemWriterJobConfiguration {
     @Bean
     public Job jpaBatchItemWriterJob() {
         return jobBuilderFactory.get("jpaBatchItemWriterJob")
-            .start(updateUserStep.updateSleepStep())
+            .start(updateUserStep.updateSleepStep(null))
                 .next(sendEmailStep.sendEmailStep1())
                 .next(sendEmailStep.sendEmailStep2())
             .build();

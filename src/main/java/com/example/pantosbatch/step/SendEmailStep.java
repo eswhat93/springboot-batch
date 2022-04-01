@@ -1,4 +1,4 @@
-package com.example.pantosbatch.job;
+package com.example.pantosbatch.step;
 
 import com.example.pantosbatch.entity.CcSet;
 import com.example.pantosbatch.entity.CcUser;

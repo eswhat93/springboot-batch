@@ -1,4 +1,4 @@
-package com.example.pantosbatch.job;
+package com.example.pantosbatch.step;
 
 import com.example.pantosbatch.entity.CcSet;
 import com.example.pantosbatch.entity.CcUser;
@@ -15,6 +15,7 @@ import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.batch.item.support.CompositeItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,7 +36,8 @@ public class UpdateUserStep {
     final int ccSetSeq = 1; // 실데이터값으로 수정
 
     @Bean
-    public Step updateSleepStep(){
+    public Step updateSleepStep(@Value("{jobParameters[requestDate]}") String requestDate){
+        log.info(">>>>> requestDate = {}", requestDate);
         return stepBuilderFactory.get("updateSleepStep")
                 .<CcUser, CcUser>chunk(chunkSize)
                 .reader(jpaCursorUSerReader())

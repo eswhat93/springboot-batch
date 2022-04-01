@@ -14,6 +14,7 @@ import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +36,7 @@ public class QuartzConfiguration {
     }
     @Bean
     public JobDetailFactoryBean jobDetailFactoryBean() {
+        LocalDate now = LocalDate.now();
         JobDetailFactoryBean factory = new JobDetailFactoryBean();
         factory.setJobClass(QuartzJobLauncher.class);
         Map map = new HashMap();
@@ -54,8 +56,8 @@ public class QuartzConfiguration {
         stFactory.setStartDelay(3000);
         stFactory.setName("cron_trigger");
         stFactory.setGroup("cron_group");
-        stFactory.setCronExpression("0 15 9 * * ?"); //0 0/1 * 1/1 * ? *
-        // 0 0 12 * * ?
+        stFactory.setCronExpression("0 0/1 * 1/1 * ? *"); //0 0/1 * 1/1 * ? *
+        // 0 0 9 * * ?
         return stFactory;
     }
 
